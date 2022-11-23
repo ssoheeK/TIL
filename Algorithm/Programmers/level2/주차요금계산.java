@@ -16,27 +16,24 @@ public class 주차요금계산 {
                     continue;
                 }
 
+                int time = Integer.parseInt(arr[0].split(":")[0]) * 60
+                        + Integer.parseInt(arr[0].split(":")[1]);
+
                 boolean out = false;
                 for (int j = i + 1; j < records.length; j++) {
                     String[] arr2 = records[j].split(" ");
                     if (arr[1].equals(arr2[1])) {
-                        int time1 = Integer.parseInt(arr[0].split(":")[0]) * 60
-                                + Integer.parseInt(arr[0].split(":")[1]);
-
                         int time2 = Integer.parseInt(arr2[0].split(":")[0]) * 60
                                 + Integer.parseInt(arr2[0].split(":")[1]);
 
-                        map.put(arr[1], map.getOrDefault(arr[1], 0) + (time2 - time1));
+                        map.put(arr[1], map.getOrDefault(arr[1], 0) + (time2 - time));
                         out = true;
                         break;
                     }
                 }
                 // 출차된게 아니라면
                 if (!out) {
-                    int time1 = Integer.parseInt(arr[0].split(":")[0]) * 60
-                            + Integer.parseInt(arr[0].split(":")[1]);
-
-                    map.put(arr[1], map.getOrDefault(arr[1], 0) + (midnight - time1));
+                    map.put(arr[1], map.getOrDefault(arr[1], 0) + (midnight - time));
                 }
             }
 
